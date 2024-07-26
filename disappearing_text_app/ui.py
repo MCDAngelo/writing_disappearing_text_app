@@ -16,6 +16,7 @@ class UI(ttk.Frame):
         self.create_input_textbox()
         self.create_save_button()
         self.parent.bind("<Key>", self.key_handler)
+        self.textbox.bind("<FocusIn>", self.select_line)
 
     def create_instructions_info(self):
         self.instructions = ttk.Label(
@@ -61,3 +62,6 @@ class UI(ttk.Frame):
             self.timer.cancel_timer()
         self.timer.timer.start()
         self.timer.tick()
+
+    def select_line(self, event=None):
+        self.textbox.tag_add("sel", "insert linestart", "insert lineend")

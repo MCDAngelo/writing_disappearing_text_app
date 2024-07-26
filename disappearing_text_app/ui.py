@@ -4,6 +4,8 @@ from tkinter.filedialog import asksaveasfilename
 
 from .timer import Timekeeper
 
+TIMER_SEC = 5
+
 
 class UI(ttk.Frame):
     def __init__(self, root, *args, **kwargs):
@@ -13,6 +15,7 @@ class UI(ttk.Frame):
         self.create_instructions_info()
         self.create_input_textbox()
         self.create_save_button()
+        self.parent.bind("<Key>", self.key_handler)
 
     def create_instructions_info(self):
         self.instructions = ttk.Label(
@@ -25,7 +28,7 @@ class UI(ttk.Frame):
 
     def create_timer(self):
         self.timer = Timekeeper(self, row=0, column=0, padx=40, pady=20)
-        self.timer.new_timer(5, font=("Courier", 42))
+        self.timer.new_timer(TIMER_SEC, font=("Courier", 42))
 
     def create_input_textbox(self):
         self.textbox = ttk.Text(
@@ -52,3 +55,9 @@ class UI(ttk.Frame):
         filename = asksaveasfilename()
         with open(filename, mode="w") as f:
             f.write(entered_text)
+
+    def key_handler(self, event):
+        if self.timer.job_id is not None:
+            self.timer.cancel_timer()
+        self.timer.timer.start()
+        self.timer.tick()

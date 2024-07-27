@@ -15,7 +15,7 @@ class Timer(tk.Label):
 
     def reset_formatting(self):
         self.parent.configure(bootstyle="default")
-        self.parent.instructions.configure(bootstyle="default")
+        self.parent.textbox.config(bg="white", fg="#555555")
         self.config(bg="white", fg="#555555")
 
     def tick(self):
@@ -23,12 +23,12 @@ class Timer(tk.Label):
             self.time -= 1
         if self.time == 2:
             self.parent.configure(bootstyle="warning")
-            self.parent.instructions.configure(bootstyle="inverse-warning")
-            self.config(bg="#ff851b", fg="white")
+            self.parent.textbox.config(bg="#f39c12", fg="white")
+            self.config(bg="#f39c12", fg="white")
         elif self.time == 1:
             self.parent.configure(bootstyle="danger")
-            self.parent.instructions.configure(bootstyle="inverse-danger")
-            self.config(bg="#ff4136")
+            self.parent.textbox.config(bg="#e74c3c", fg="white")
+            self.config(bg="#e74c3c", fg="white")
         elif self.time <= 0:
             self.running = False
             self.reset_formatting()

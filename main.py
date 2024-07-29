@@ -3,6 +3,7 @@ import ttkbootstrap as ttk
 from disappearing_text_app.ui import UI
 
 root = ttk.Window(themename="flatly")
+root.title("Write it or Lose it")
 root.configure(width=1500, height=900)
 ui = UI(root, width=150, height=50, padding=20)
 ui.place(x=0, y=0)
